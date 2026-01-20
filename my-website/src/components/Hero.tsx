@@ -26,7 +26,7 @@ const Hero = () => {
           </motion.div>
 
           <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl">
-            John Doe
+            Sajan Patel
           </h1>
 
           <p className="mt-4 text-xl font-medium text-muted-foreground md:text-2xl">
@@ -42,9 +42,11 @@ const Hero = () => {
 
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <motion.a
-              href="/resume.pdf"
+              href="/SajanResume_Jan2026.pdf"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
             >
               <FileText className="h-4 w-4" />
@@ -64,7 +66,7 @@ const Hero = () => {
 
           <div className="mt-10 flex items-center gap-4">
             <a
-              href="https://github.com"
+              href="https://github.com/sjnptl"
               target="_blank"
               rel="noopener noreferrer"
               className="flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-card text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
@@ -73,7 +75,7 @@ const Hero = () => {
               <Github className="h-5 w-5" />
             </a>
             <a
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/in/sajan-k-patel/"
               target="_blank"
               rel="noopener noreferrer"
               className="flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-card text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
@@ -82,7 +84,7 @@ const Hero = () => {
               <Linkedin className="h-5 w-5" />
             </a>
             <a
-              href="mailto:john@example.com"
+              href="mailto:sajanqt314@gmail.com"
               className="flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-card text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
               aria-label="Email"
             >

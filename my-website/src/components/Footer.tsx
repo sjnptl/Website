@@ -22,7 +22,7 @@ const Footer = () => {
               className="flex items-center gap-2 rounded-lg border border-border bg-card px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-secondary"
             >
               <Mail className="h-4 w-4" />
-              john@example.com
+              sajanqt314@gmail.com
             </a>
             <a
               href="https://github.com"
@@ -34,7 +34,7 @@ const Footer = () => {
               <Github className="h-5 w-5" />
             </a>
             <a
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/in/sajan-k-patel/"
               target="_blank"
               rel="noopener noreferrer"
               className="flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-card text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
@@ -46,7 +46,7 @@ const Footer = () => {
         </div>
 
         <div className="mt-8 border-t border-border pt-6 text-center text-sm text-muted-foreground">
-          © {currentYear} John Doe. Built with React & Tailwind CSS.
+          © {currentYear} Sajan Patel. Built with React & Tailwind CSS.
         </div>
       </div>
     </footer>

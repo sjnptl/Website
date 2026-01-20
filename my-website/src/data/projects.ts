@@ -11,64 +11,98 @@ export interface Project {
 }
 
 export const projects: Project[] = [
-  {
-    id: "distributed-task-queue",
-    title: "Distributed Task Queue",
-    description: "High-throughput task processing system handling 10K+ jobs/minute with fault tolerance and horizontal scaling.",
-    problem: "Legacy cron-based job processing was unreliable and couldn't scale with growing workloads.",
-    techStack: ["Go", "Redis", "PostgreSQL", "Docker", "Kubernetes"],
-    role: "Lead Engineer",
-    contributions: [
-      "Designed message-passing architecture with exactly-once delivery guarantees",
-      "Implemented dead-letter queues and automatic retry with exponential backoff",
-      "Reduced processing latency by 85% compared to previous system"
+    {
+    id: "chat-with-documents-ai",
+    title: "Chat-with-Documents AI Application",
+    description:
+        "AI-powered web application that allows users to upload documents and interact with them through conversational Q&A.",
+    problem:
+        "Users needed an intuitive way to extract insights from large documents without manually searching through files.",
+    techStack: [
+        "Python",
+        "FastAPI",
+        "AWS S3",
+        "MongoDB",
+        "LangChain",
+        "OpenAI API",
+        "FAISS"
     ],
-    githubUrl: "https://github.com",
-    liveUrl: undefined
-  },
-  {
-    id: "realtime-analytics-dashboard",
-    title: "Real-time Analytics Dashboard",
-    description: "Live metrics visualization platform processing millions of events with sub-second latency.",
-    problem: "Business stakeholders needed real-time visibility into system performance and user behavior.",
-    techStack: ["React", "TypeScript", "WebSocket", "Node.js", "ClickHouse"],
-    role: "Full-Stack Engineer",
-    contributions: [
-      "Built custom WebSocket layer handling 50K concurrent connections",
-      "Optimized React rendering for smooth 60fps updates on complex charts",
-      "Implemented efficient data aggregation reducing query times by 70%"
-    ],
-    githubUrl: "https://github.com",
-    liveUrl: "https://demo.example.com"
-  },
-  {
-    id: "api-gateway",
-    title: "API Gateway & Rate Limiter",
-    description: "Centralized API gateway with intelligent rate limiting, request validation, and observability.",
-    problem: "Microservices architecture needed unified authentication, rate limiting, and request routing.",
-    techStack: ["Python", "FastAPI", "Redis", "AWS Lambda", "Terraform"],
     role: "Backend Engineer",
     contributions: [
-      "Designed token bucket algorithm supporting tiered rate limits per client",
-      "Implemented circuit breaker pattern preventing cascade failures",
-      "Added distributed tracing with OpenTelemetry for debugging complex flows"
+        "Built a FastAPI backend enabling document upload, storage, and conversational querying",
+        "Implemented vector-based document retrieval using FAISS and OpenAI embeddings for context-aware responses",
+        "Integrated AWS S3 for secure document storage and MongoDB for session-based conversation history"
     ],
-    githubUrl: "https://github.com",
+    githubUrl: "https://github.com/sjnptl",
     liveUrl: undefined
-  },
-  {
-    id: "ml-feature-store",
-    title: "ML Feature Store",
-    description: "Centralized feature management platform serving ML models in production with low-latency lookups.",
-    problem: "Data scientists were duplicating feature engineering work and production features drifted from training.",
-    techStack: [".NET", "PostgreSQL", "Redis", "Apache Kafka", "Docker"],
-    role: "Senior Engineer",
+    },
+    {
+    id: "full-stack-web-platform",
+    title: "Full-Stack Web Platform",
+    description:
+        "Scalable web platform with REST APIs and responsive frontend components for web and mobile use cases.",
+    problem:
+        "The application required a maintainable backend architecture and responsive UI to support evolving business needs.",
+    techStack: [
+        "Node.js",
+        "PostgreSQL",
+        "Spring Boot",
+        "REST APIs",
+        "JavaScript",
+        "React"
+    ],
+    role: "Full-Stack Engineer Intern",
     contributions: [
-      "Architected event-driven pipeline for real-time feature computation",
-      "Built versioning system ensuring training-serving consistency",
-      "Achieved p99 latency under 10ms for feature retrieval at scale"
+        "Designed and implemented backend REST APIs using Node.js and Spring Boot",
+        "Developed interactive frontend features with a focus on responsiveness and usability",
+        "Collaborated with designers and engineers to align technical solutions with product goals"
     ],
-    githubUrl: "https://github.com",
+    githubUrl: "https://github.com/sjnptl",
     liveUrl: undefined
-  }
+    },
+    {
+    id: "biosignal-monitoring-system",
+    title: "Real-Time Bio-Signal Monitoring System",
+    description:
+        "Python-based application for real-time acquisition, visualization, and analysis of physiological sensor data.",
+    problem:
+        "Researchers needed a reliable way to collect and visualize EMG, ECG, and pulse oximeter data in real time.",
+    techStack: [
+        "Python",
+        "Signal Processing",
+        "Microcontrollers",
+        "Embedded Systems"
+    ],
+    role: "Software Engineer",
+    contributions: [
+        "Engineered real-time data pipelines to interface with EMG, ECG, and pulse oximeter sensors",
+        "Developed an interactive GUI for visualizing physiological signals",
+        "Implemented signal-processing techniques to support analysis and feature extraction"
+    ],
+    githubUrl: "https://github.com/sjnptl",
+    liveUrl: undefined
+    },
+    {
+    id: "salesforce-data-automation",
+    title: "Salesforce Data Automation & Validation",
+    description:
+        "Internal tooling and automation to improve data quality and consistency across Salesforce records.",
+    problem:
+        "Inconsistent and error-prone client data created downstream reporting and operational issues.",
+    techStack: [
+        "Salesforce",
+        "Web Scraping",
+        "Data Validation",
+        "Automation Scripts"
+    ],
+    role: "Software Engineering Intern",
+    contributions: [
+        "Automated data collection and ingestion using web scraping techniques",
+        "Identified and resolved inconsistencies in Salesforce client records",
+        "Improved overall data integrity and reduced manual correction efforts"
+    ],
+    githubUrl: "https://github.com/sjnptl",
+    liveUrl: undefined
+    }
+
 ];

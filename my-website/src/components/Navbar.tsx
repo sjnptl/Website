@@ -38,7 +38,7 @@ const Navbar = () => {
           href="#"
           className="text-lg font-semibold tracking-tight text-foreground"
         >
-          JD
+          SJNPTL
         </a>
 
         {/* Desktop Navigation */}

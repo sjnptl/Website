@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 const skillCategories = [
   {
     title: "Languages",
-    skills: ["JavaScript", "TypeScript", "Python", "Go", "C#"],
+    skills: ["JavaScript", "TypeScript", "Python", "HTML", "SQL"],
   },
   {
     title: "Frameworks",
@@ -11,11 +11,11 @@ const skillCategories = [
   },
   {
     title: "Databases",
-    skills: ["PostgreSQL", "MongoDB", "Redis", "ClickHouse"],
+    skills: ["PostgreSQL", "MongoDB", "MySQL",],
   },
   {
     title: "Cloud & Tools",
-    skills: ["AWS", "Docker", "Kubernetes", "Terraform", "Git"],
+    skills: ["AWS S3", "FAISS", "LangChain", "Git"],
   },
 ];
 
