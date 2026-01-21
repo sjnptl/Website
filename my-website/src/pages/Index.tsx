@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import Skills from "@/components/Skills";
 import Projects from "@/components/Projects";
 import Footer from "@/components/Footer";
+import ChatWidget from "@/components/Chat";
 
 const Index = () => {
   return (
@@ -14,6 +15,7 @@ const Index = () => {
         <Projects />
       </main>
       <Footer />
+      <ChatWidget />
     </div>
   );
 };
