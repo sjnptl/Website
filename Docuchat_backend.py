@@ -3,6 +3,8 @@ import pymongo
 # Import traceback for error handling
 import traceback
 
+from typing import Optional  # Import Optional for type hinting
+
 # Import os and sys for system-related operations
 import os, sys
 import traceback  # Import traceback for error handling
@@ -14,7 +16,7 @@ from fastapi import (
 )  # Import FastAPI components for building the web application
 from fastapi.responses import JSONResponse  # Import JSONResponse for returning JSON responses
 from fastapi.middleware.cors import CORSMiddleware  # Import CORS middleware to handle Cross-Origin Resource Sharing
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_openai import OpenAIEmbeddings
 from langchain_community.vectorstores import FAISS
 # from langchain_community.document_loaders import S3FileLoader
@@ -22,8 +24,7 @@ from langchain_community.document_loaders import Docx2txtLoader,PyPDFLoader
 
 
 from langchain_community.callbacks import get_openai_callback
-from langchain.chains import ConversationalRetrievalChain
-
+from langchain_classic.chains import ConversationalRetrievalChain
 from langchain_openai import ChatOpenAI
 import gc
 
@@ -43,24 +44,28 @@ if os.name == "nt":  # Windows
     load_dotenv(".secrets.env")
 
 # Retrieve and assign environment variables to variables
-# S3_KEY = os.environ.get("S3_KEY")  # AWS S3 access key
-# S3_SECRET = os.environ.get("S3_SECRET")  # AWS S3 secret access key
-# S3_BUCKET = os.environ.get("S3_BUCKET")  # AWS S3 bucket name
-# S3_REGION = os.environ.get("S3_REGION")  # AWS S3 region
-# OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")  # OpenAI API key
-# MONGO_URL = os.environ.get("MONGO_URL")  # MongoDB connection URL
-# S3_PATH = os.environ.get("S3_PATH")  # AWS S3 pathi
+S3_KEY = os.environ.get("S3_KEY")  # AWS S3 access key
+S3_SECRET = os.environ.get("S3_SECRET")  # AWS S3 secret access key
+S3_BUCKET = "sajans-website"  # AWS S3 bucket name
+S3_REGION = os.environ.get("S3_REGION")  # AWS S3 region
+OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")  # OpenAI API key
+MONGO_URL = os.environ.get("MONGO_URL")  # MongoDB connection URL
+S3_PATH = os.environ.get("S3_PATH")  # AWS S3 pathi
 
-os.environ['OPENAI_API_KEY']=""
-S3_KEY=""
-S3_SECRET=""
-S3_BUCKET=""
-S3_REGION=""
-S3_PATH=""
+# os.environ['OPENAI_API_KEY']=""
+# S3_KEY=""
+# S3_SECRET=""
+# S3_BUCKET=""
+# S3_REGION=""
+# S3_PATH=""
 
 
 try:
-    MONGO_URL="Add your credentials"
+    print("OPENAI_API_KEY loaded:", bool(OPENAI_API_KEY))
+
+    if not MONGO_URL:
+        raise RuntimeError("MONGO_URL is not set")
+
 
     # Connect to the MongoDB using the provided MONGO_URL
     client = pymongo.MongoClient(MONGO_URL, uuidRepresentation="standard")
@@ -70,7 +75,7 @@ try:
     conversationcol = db["chat-history"]
 
     # Create an index on the "session_id" field, ensuring uniqueness
-    conversationcol.create_index([("session_id")], unique=True)
+    conversationcol.create_index([("session_id", 1)], unique=True)
 except:
     # Handle exceptions and print detailed error information
     print(traceback.format_exc())
@@ -88,7 +93,7 @@ except:
 
 
 class ChatMessageSent(BaseModel):
-    session_id: str = None
+    session_id: Optional[str] = None
     user_input: str
     data_source: str
 
@@ -126,9 +131,15 @@ def get_response(
 
 
     """
-    embeddings = OpenAIEmbeddings()  # load embeddings
+    embeddings = OpenAIEmbeddings(
+        openai_api_key=OPENAI_API_KEY
+    )  # load embeddings
     # download file from s3
-    wr.s3.download(path=f"s3://docchat/documents/{file_name}",local_file=file_name,boto3_session=aws_s3)
+    wr.s3.download(
+        path=f"s3://{S3_BUCKET}/{S3_PATH}{file_name}",
+        local_file=file_name,
+        boto3_session=aws_s3,
+    )
 
     # loader = S3FileLoader(
     #     bucket=S3_BUCKET,
@@ -153,7 +164,7 @@ def get_response(
     # 3. store data in vector db to conduct search
     vectorstore = FAISS.from_documents(all_splits, embeddings)
     # 4. init OpenAI
-    llm = ChatOpenAI(model_name=model, temperature=temperature)
+    llm = ChatOpenAI(model_name=model, temperature=temperature, openai_api_key=OPENAI_API_KEY)
 
     # 5. pass the data to openai chain using vector db
     qa_chain = ConversationalRetrievalChain.from_llm(
@@ -178,7 +189,7 @@ def get_response(
     gc.collect()  # collect garbage from memory
     return answer
 import uuid
-from typing import List
+from typing import List, Optional
 
 
 def load_memory_to_pass(session_id: str):
