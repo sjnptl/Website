@@ -12,13 +12,13 @@ const Footer = () => {
               Let's connect
             </h2>
             <p className="mt-1 text-muted-foreground">
-              Open to discussing opportunities and collaborations.
+              Open to discussing opportunities and collaborations
             </p>
           </div>
 
           <div className="flex items-center gap-4">
             <a
-              href="mailto:john@example.com"
+              href="mailto:sajanqt314@gmail.com"
               className="flex items-center gap-2 rounded-lg border border-border bg-card px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-secondary"
             >
               <Mail className="h-4 w-4" />

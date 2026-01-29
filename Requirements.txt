@@ -18,3 +18,5 @@ langchain-community
 docx2txt
 langchain_openai
 streamlit
+langchain_text_splitters
+langchain-core
