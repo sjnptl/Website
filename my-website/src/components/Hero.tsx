@@ -42,7 +42,7 @@ const Hero = () => {
 
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <motion.a
-              href="/SajanResume_Jan2026.pdf"
+              href="SajanPatel_Resume.pdf"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               target="_blank"
@@ -84,7 +84,7 @@ const Hero = () => {
               <Linkedin className="h-5 w-5" />
             </a>
             <a
-              href="mailto:sajanqt314@gmail.com"
+              href="mailto:skpat1966@gmail.com"
               className="flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-card text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
               aria-label="Email"
             >
