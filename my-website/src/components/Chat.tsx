@@ -68,7 +68,7 @@ const ChatWidget = () => {
         body: JSON.stringify({
           ...(sessionId ? { session_id: sessionId } : {}),
           user_input: input,
-          data_source: "SajanResume_Jan2026.pdf",
+          
         }),
       });
 

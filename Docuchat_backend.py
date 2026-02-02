@@ -2,7 +2,7 @@ from pydantic import BaseModel
 import pymongo
 # Import traceback for error handling
 import traceback
-
+import tempfile
 from typing import Optional  # Import Optional for type hinting
 
 # Import os and sys for system-related operations
@@ -89,23 +89,41 @@ except:
 
 
 
+# Create an AWS S3 session with provided access credentials
+aws_s3 = boto3.Session(
+    aws_access_key_id=S3_KEY,  # Set the AWS access key ID
+    aws_secret_access_key=S3_SECRET,  # Set the AWS secret access key
+    region_name="us-east-2",  # Set the AWS region
+)
+
 # Import the necessary modules and libraries
+pdf_keys = wr.s3.list_objects(
+    f"s3://{S3_BUCKET}/{S3_PATH}",
+    boto3_session=aws_s3,
+)
+
+pdf_keys = [k for k in pdf_keys if k.lower().endswith(".pdf")]
+
+if not pdf_keys:
+    raise HTTPException(404, "No PDF documents found in S3 folder")
+
+print("PDF keys found:", pdf_keys)
 
 
 class ChatMessageSent(BaseModel):
     session_id: Optional[str] = None
     user_input: str
-    data_source: str
+    # data_source: str
 
 def get_response(
-    file_name: str,
+    # file_name: str,
     session_id: str,
     query: str,
     model: str = "gpt-3.5-turbo-16k",
     temperature: float = 0,
 ):
-    print("file name is ", file_name)
-    file_name=file_name.split("/")[-1]
+    # print("file name is ", file_name)
+    # file_name=file_name.split("/")[-1]
     """
     Generate a response using a conversational model.
 
@@ -135,32 +153,43 @@ def get_response(
         openai_api_key=OPENAI_API_KEY
     )  # load embeddings
     # download file from s3
-    wr.s3.download(
-        path=f"s3://{S3_BUCKET}/{S3_PATH}{file_name}",
-        local_file=file_name,
-        boto3_session=aws_s3,
-    )
 
-    # loader = S3FileLoader(
-    #     bucket=S3_BUCKET,
-    #     key=S3_PATH + file_name.split("/")[-1],
-    #     aws_access_key_id=S3_KEY,
-    #     aws_secret_access_key=S3_SECRET,
-    # )
-    if file_name.endswith(".docx"):
-        loader=Docx2txtLoader(file_path=file_name.split("/")[-1])
-    else:
-        loader = PyPDFLoader(file_name)
+    all_docs = []
+    with tempfile.TemporaryDirectory() as tmpdir:
+        for s3_key in pdf_keys:
+            file_name = os.path.basename(s3_key)
+            local_path = os.path.join(tmpdir, file_name)
 
-    # 1. load data
-    data = loader.load()
+            if s3_key.startswith("s3://"):
+                s3_path = s3_key
+            else:
+                s3_path = f"s3://{S3_BUCKET}/{s3_key}"
+
+            wr.s3.download(
+                path=s3_path,  # ✅ s3_key already includes documents/
+                local_file=local_path,
+                boto3_session=aws_s3,
+            )
+
+            loader = PyPDFLoader(local_path)
+
+            # 1. load data
+            data = loader.load()
+            
+            for d in data:
+                d.metadata["source"] = file_name
+
+            all_docs.extend(data)
+
+ 
+    # data = loader.load()
     # 2. split data so it can fit GPT token limit
     print("splitting ..")
     text_splitter = RecursiveCharacterTextSplitter(
         chunk_size=1000, chunk_overlap=0, separators=["\n", " ", ""]
     )
 
-    all_splits = text_splitter.split_documents(data)
+    all_splits = text_splitter.split_documents(all_docs)
     # 3. store data in vector db to conduct search
     vectorstore = FAISS.from_documents(all_splits, embeddings)
     # 4. init OpenAI
@@ -310,12 +339,12 @@ async def create_chat_message(
             payload = ChatMessageSent(
                 session_id=session_id,
                 user_input=chats.user_input,
-                data_source=chats.data_source,
+                # data_source=chats.data_source,
             )
             payload = payload.model_dump()
 
             response = get_response(
-                file_name=payload.get("data_source"),
+                # file_name=payload.get("data_source"),
                 session_id=payload.get("session_id"),
                 query=payload.get("user_input"),
             )
@@ -336,12 +365,12 @@ async def create_chat_message(
             payload = ChatMessageSent(
                 session_id=str(chats.session_id),
                 user_input=chats.user_input,
-                data_source=chats.data_source,
+                # data_source=chats.data_source,
             )
             payload = payload.dict()
 
             response = get_response(
-                file_name=payload.get("data_source"),
+                # file_name=payload.get("data_source"),
                 session_id=payload.get("session_id"),
                 query=payload.get("user_input"),
             )
