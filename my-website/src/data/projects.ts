@@ -44,12 +44,13 @@ export const projects: Project[] = [
     problem:
         "The application required a maintainable backend architecture and responsive UI to support evolving business needs.",
     techStack: [
-        "Node.js",
-        "PostgreSQL",
-        "Spring Boot",
+        "React",
+        "TypeScript",
+        "Vite",
+        "Tailwind CSS",
+        "Python",
         "REST APIs",
-        "JavaScript",
-        "React"
+        "GitHub"
     ],
     role: "Full-Stack Engineer Intern",
     contributions: [
@@ -82,27 +83,27 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/sjnptl",
     liveUrl: undefined
     },
-    {
-    id: "salesforce-data-automation",
-    title: "Salesforce Data Automation & Validation",
-    description:
-        "Internal tooling and automation to improve data quality and consistency across Salesforce records.",
-    problem:
-        "Inconsistent and error-prone client data created downstream reporting and operational issues.",
-    techStack: [
-        "Salesforce",
-        "Web Scraping",
-        "Data Validation",
-        "Automation Scripts"
-    ],
-    role: "Software Engineering Intern",
-    contributions: [
-        "Automated data collection and ingestion using web scraping techniques",
-        "Identified and resolved inconsistencies in Salesforce client records",
-        "Improved overall data integrity and reduced manual correction efforts"
-    ],
-    githubUrl: "https://github.com/sjnptl",
-    liveUrl: undefined
-    }
+    // {
+    // id: "salesforce-data-automation",
+    // title: "Salesforce Data Automation & Validation",
+    // description:
+    //     "Internal tooling and automation to improve data quality and consistency across Salesforce records.",
+    // problem:
+    //     "Inconsistent and error-prone client data created downstream reporting and operational issues.",
+    // techStack: [
+    //     "Salesforce",
+    //     "Web Scraping",
+    //     "Data Validation",
+    //     "Automation Scripts"
+    // ],
+    // role: "Software Engineering Intern",
+    // contributions: [
+    //     "Automated data collection and ingestion using web scraping techniques",
+    //     "Identified and resolved inconsistencies in Salesforce client records",
+    //     "Improved overall data integrity and reduced manual correction efforts"
+    // ],
+    // githubUrl: "https://github.com/sjnptl",
+    // liveUrl: undefined
+    // }
 
 ];

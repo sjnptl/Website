@@ -34,13 +34,24 @@ const Navbar = () => {
       }`}
     >
       <nav className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-        <a
-          href="#"
-          className="text-lg font-semibold tracking-tight text-foreground"
-        >
-          SJNPTL
+        <a className="flex items-center gap-3 text-lg font-semibold tracking-tight text-foreground" href="#about">
+          <img
+            src="/profile.jpeg"
+            alt="Sajan Patel"
+            className="
+              rounded-full
+              object-cover
+              h-9 w-9
+              sm:h-10 sm:w-10
+              md:h-11 md:w-11
+              transition-transform
+              duration-300
+              ease-out
+              hover:scale-105"
+          />
+          <span className="leading-none">Sajan K Patel</span>
         </a>
-
+        
         {/* Desktop Navigation */}
         <div className="hidden items-center gap-8 md:flex">
           {navLinks.map((link) => (

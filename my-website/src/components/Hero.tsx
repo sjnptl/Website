@@ -35,9 +35,8 @@ const Hero = () => {
           </p>
 
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
-            I build reliable, scalable systems that solve real problems. 
-            5+ years of experience turning complex requirements into clean, 
-            maintainable code that teams can trust.
+            I am a new grad Software Engineer with a passion for building and maintaining applications.
+             I enjoy working with modern technologies and solving complex problems. Check me out!
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-4">
