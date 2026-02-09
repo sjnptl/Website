@@ -4,8 +4,7 @@ import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
-    <section
-      id="about"
+    <section id="about"
       className="relative flex min-h-screen items-center justify-center overflow-hidden"
       style={{ background: "var(--gradient-hero)" }}
     >
@@ -42,7 +41,7 @@ const Hero = () => {
 
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <motion.a
-              href="/SajanPatel_Resume.pdf"
+              href="./SajanPatel_Resume.pdf"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               target="_blank"
@@ -54,13 +53,16 @@ const Hero = () => {
             </motion.a>
 
             <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-              <Link
-                to="/projects"
-                className="inline-flex items-center gap-2 rounded-lg border border-border bg-card px-5 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-secondary"
-              >
-                View Projects
-                <ArrowDown className="h-4 w-4" />
-              </Link>
+              <button
+                onClick={() => {
+                  const section = document.getElementById("projects");
+                  section?.scrollIntoView({ behavior: "smooth" });
+                }}
+                  className="inline-flex items-center gap-2 rounded-lg border border-border bg-card 
+                  px-5 py-2.5 text-sm font-medium text-foreground transition-colors
+                  hover:bg-secondary"
+                >View Projects <ArrowDown className="h-4 w-4" />
+              </button>
             </motion.div>
 
           </div>

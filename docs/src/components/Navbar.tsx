@@ -2,14 +2,12 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
-import { Link } from "react-router-dom";
-
 
 const navLinks = [
-  { Link: "/about", label: "About" },
-  { Link: "/skills", label: "Skills" },
-  { Link: "/projects", label: "Projects" },
-  { Link: "/contact", label: "Contact" },
+  { id: "about", label: "About" },
+  { id: "skills", label: "Skills" },
+  { id: "projects", label: "Projects" },
+  { id: "contact", label: "Contact" },
 ];
 
 const Navbar = () => {
@@ -36,9 +34,14 @@ const Navbar = () => {
       }`}
     >
       <nav className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-        <Link to="/about" className="flex items-center gap-3 text-lg font-semibold tracking-tight text-foreground">
+        <button 
+            onClick={() => {
+                  const section = document.getElementById("about");
+                  section?.scrollIntoView({ behavior: "smooth" });
+                }}
+          className="flex items-center gap-3 text-lg font-semibold tracking-tight text-foreground">
           <img
-            src="/profile.jpeg"
+            src="./profile.jpeg"
             alt="Sajan Patel"
             className="
               rounded-full
@@ -52,14 +55,21 @@ const Navbar = () => {
               hover:scale-105"
           />
           <span className="leading-none">Sajan K Patel</span>
-          </Link>
+        </button>
         
         {/* Desktop Navigation */}
         <div className="hidden items-center gap-8 md:flex">
           {navLinks.map((link) => (
-            <Link key={link.Link} to={link.Link} className="nav-link">
+            <button
+              key={link.id}
+                onClick={() => {
+                  const section = document.getElementById(link.id);
+                  section?.scrollIntoView({ behavior: "smooth" });
+                }}
+              className="nav-link"
+              >
               {link.label}
-            </Link>
+            </button>
           ))}
           <ThemeToggle />
         </div>
@@ -91,14 +101,17 @@ const Navbar = () => {
         >
           <div className="flex flex-col gap-1 px-6 py-4">
             {navLinks.map((link) => (
-              <Link
-                key={link.Link}
-                to={link.Link}
-                onClick={() => setIsMobileMenuOpen(false)}
+              <button
+                key={link.id}
+                onClick={() => {
+                  const section = document.getElementById(link.id);
+                  section?.scrollIntoView({ behavior: "smooth" });
+                  setIsMobileMenuOpen(false);
+                }}
                 className="rounded-lg px-3 py-2 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
               >
                 {link.label}
-              </Link>
+              </button>
             ))}
           </div>
         </motion.div>
