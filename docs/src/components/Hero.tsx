@@ -41,7 +41,7 @@ const Hero = () => {
 
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <motion.a
-              href="SajanPatel_Resume.pdf"
+              href="/SajanPatel_Resume.pdf"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               target="_blank"
@@ -53,7 +53,7 @@ const Hero = () => {
             </motion.a>
 
             <motion.a
-              href="#projects"
+              href="/projects"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               className="inline-flex items-center gap-2 rounded-lg border border-border bg-card px-5 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-secondary"
