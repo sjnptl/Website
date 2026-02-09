@@ -25,6 +25,6 @@ dist-ssr
 .secrets.env
 *.md
 *.txt
-*.json
+
 
 
