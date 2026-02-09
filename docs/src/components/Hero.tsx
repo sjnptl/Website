@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowDown, FileText, Github, Linkedin, Mail } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
@@ -52,15 +53,16 @@ const Hero = () => {
               Download Resume
             </motion.a>
 
-            <motion.a
-              href="/projects"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="inline-flex items-center gap-2 rounded-lg border border-border bg-card px-5 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-secondary"
-            >
-              View Projects
-              <ArrowDown className="h-4 w-4" />
-            </motion.a>
+            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+              <Link
+                to="/projects"
+                className="inline-flex items-center gap-2 rounded-lg border border-border bg-card px-5 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-secondary"
+              >
+                View Projects
+                <ArrowDown className="h-4 w-4" />
+              </Link>
+            </motion.div>
+
           </div>
 
           <div className="mt-10 flex items-center gap-4">
