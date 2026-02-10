@@ -41,7 +41,7 @@ const Hero = () => {
 
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <motion.a
-              href="./SajanPatel_Resume.pdf"
+              href="/SajanPatel_Resume.pdf"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               target="_blank"
