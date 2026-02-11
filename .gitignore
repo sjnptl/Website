@@ -24,6 +24,21 @@ dist-ssr
 *.sw?
 .secrets.env
 *.md
+# Python
+venv/
+.venv/
+__pycache__/
+*.pyc
+
+# Node
+node_modules/
+.next/
+dist/
+build/
+
+# Misc
+.env
+.git
 
 
 

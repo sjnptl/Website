@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Send, X, MessageCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
+
+
 interface ChatMessage {
   id: string;
   type: "user" | "bot";
@@ -60,7 +62,7 @@ const ChatWidget = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch("http://localhost:8000/chat", {
+      const response = await fetch("https://backendwebsite-production.up.railway.app/chat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
