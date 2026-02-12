@@ -2,6 +2,8 @@ import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Send, X, MessageCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import ReactMarkdown from "react-markdown";
+import type { Components } from "react-markdown";
 
 
 
@@ -137,6 +139,33 @@ const ChatWidget = () => {
     setSessionId(null);
     setInput("");
   };
+  
+  const markdownComponents: Components = {
+    ul: ({ node, ...props }) => (
+      <ul className="list-disc pl-5 space-y-1" {...props} />
+    ),
+    ol: ({ node, ...props }) => (
+      <ol className="list-decimal pl-5 space-y-1" {...props} />
+    ),
+    code(props) {
+    const { inline, className, children, ...rest } = props as any;
+      return inline ? (
+        <code
+          className="bg-muted px-1 py-0.5 rounded text-xs"
+          {...props}
+        >
+          {children}
+        </code>
+      ) : (
+        <pre className="bg-black text-green-400 p-2 rounded-md overflow-x-auto text-xs">
+          <code className={className} {...props}>
+            {children}
+          </code>
+        </pre>
+      );
+    },
+  };
+
 
   return (
     <>
@@ -198,7 +227,9 @@ const ChatWidget = () => {
                         : "bg-muted text-foreground"
                     }`}
                   >
-                    {message.content}
+                    <ReactMarkdown components={markdownComponents}>
+                      {message.content}
+                    </ReactMarkdown>
                   </div>
                 </motion.div>
               ))}
