@@ -7,10 +7,14 @@ const navLinks = [
   { id: "about", label: "About" },
   { id: "skills", label: "Skills" },
   { id: "projects", label: "Projects" },
-  { id: "contact", label: "Contact" },
+  { id: "contact", label: "Contact" },,
 ];
 
-const Navbar = () => {
+interface NavbarProps {
+  onOpenChat: () => void;
+}
+
+const Navbar = ({ onOpenChat }: NavbarProps) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -40,20 +44,21 @@ const Navbar = () => {
                   section?.scrollIntoView({ behavior: "smooth" });
                 }}
           className="flex items-center gap-3 text-lg font-semibold tracking-tight text-foreground">
-          <img
-            src="./profile.jpeg"
-            alt="Sajan Patel"
-            className="
-              rounded-full
-              object-cover
-              h-9 w-9
-              sm:h-10 sm:w-10
-              md:h-11 md:w-11
-              transition-transform
-              duration-300
-              ease-out
-              hover:scale-105"
-          />
+          <div className="relative h-10 w-10 sm:h-11 sm:w-11 md:h-12 md:w-12">
+            <img
+              src="./profile.jpeg"
+              alt="Sajan Patel"
+              className="
+                  absolute inset-0
+                  h-full w-full
+                  rounded-full
+                  object-cover
+                  scale-125
+                  ring-2 ring-primary/40
+                  transition-transform duration-300
+                  hover:scale-135"
+            />
+          </div>
           <span className="leading-none">Sajan K Patel</span>
         </button>
         
@@ -71,6 +76,15 @@ const Navbar = () => {
               {link.label}
             </button>
           ))}
+
+           {/* Chat Button */}
+          <button
+            onClick={onOpenChat}
+            className="rounded-lg bg-primary px-4 py-2 text-sm font-medium
+               text-primary-foreground transition-all hover:bg-primary/90 hover:shadow-md">
+            Chat
+          </button>
+
           <ThemeToggle />
         </div>
 
@@ -108,11 +122,19 @@ const Navbar = () => {
                   section?.scrollIntoView({ behavior: "smooth" });
                   setIsMobileMenuOpen(false);
                 }}
-                className="rounded-lg px-3 py-2 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
-              >
+                className="rounded-lg px-3 py-2 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground">
                 {link.label}
               </button>
             ))}
+            {/* Chat Button */}
+            <button
+              onClick={() => {
+                onOpenChat();
+                setIsMobileMenuOpen(false);
+              }}
+              className="rounded-lg bg-primary px-3 py-2 text-primary-foreground">
+              Chat
+            </button>
           </div>
         </motion.div>
       )}

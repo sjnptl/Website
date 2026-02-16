@@ -14,8 +14,12 @@ interface ChatMessage {
   timestamp: Date;
 }
 
-const ChatWidget = () => {
-  const [isOpen, setIsOpen] = useState(false);
+interface ChatWidgetProps {
+  isOpen: boolean;
+  setIsOpen: (value: boolean) => void;
+}
+
+const ChatWidget = ({ isOpen, setIsOpen }: ChatWidgetProps) => {
   const [messages, setMessages] = useState<ChatMessage[]>(
     [
       {
@@ -139,7 +143,7 @@ const ChatWidget = () => {
     setSessionId(null);
     setInput("");
   };
-  
+
   const markdownComponents: Components = {
     ul: ({ node, ...props }) => (
       <ul className="list-disc pl-5 space-y-1" {...props} />
@@ -168,7 +172,7 @@ const ChatWidget = () => {
 
 
   return (
-    <>
+    <section id="chat">
       {/* Chat Button */}
       <motion.button
         initial={{ scale: 0 }}
@@ -285,7 +289,7 @@ const ChatWidget = () => {
           </motion.div>
         )}
       </AnimatePresence>
-    </>
+    </section>
   );
 };
 
