@@ -46,7 +46,7 @@ const Navbar = ({ onOpenChat }: NavbarProps) => {
           className="flex items-center gap-3 text-lg font-semibold tracking-tight text-foreground">
           <div className="relative h-10 w-10 sm:h-11 sm:w-11 md:h-12 md:w-12">
             <img
-              src="./profile.jpeg"
+              src="./profile_picture.jpeg"
               alt="Sajan Patel"
               className="
                   absolute inset-0
