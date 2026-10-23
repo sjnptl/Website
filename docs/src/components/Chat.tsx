@@ -80,12 +80,13 @@ const ChatWidget = ({ isOpen, setIsOpen }: ChatWidgetProps) => {
         }),
       });
 
-      if (!response.ok) {
-        const err = await response.json();
-        console.error("422 details:", err);
-      }
+      const data = await response.json().catch(() => null);
 
-      const data = await response.json();
+      if (!response.ok || !data?.response) {
+        throw new Error(
+          `Chat backend returned ${response.status}: ${JSON.stringify(data)}`
+        );
+      }
 
       // Set session ID if this is the first message
       if (!sessionId) {
@@ -109,9 +110,8 @@ const ChatWidget = ({ isOpen, setIsOpen }: ChatWidgetProps) => {
     } catch (error) {
       console.error("Error:", error);
       toast({
-        title: "Error",
-        description:
-          "Failed to get response from bot. Make sure the backend is running.",
+        title: "Assistant unavailable",
+        description: "Something went wrong on our end. Please try again shortly.",
         variant: "destructive",
       });
 
@@ -120,7 +120,7 @@ const ChatWidget = ({ isOpen, setIsOpen }: ChatWidgetProps) => {
         id: (Date.now() + 2).toString(),
         type: "bot",
         content:
-          "Sorry, I encountered an error. Please try again or check that the backend is running at http://localhost:8000",
+          "Sorry, I'm having trouble answering right now. Please try again in a minute, or reach out to Sajan directly at [skpat1966@gmail.com](mailto:skpat1966@gmail.com).",
         timestamp: new Date(),
       };
 
